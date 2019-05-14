@@ -3,17 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-double activation(double x)
-{
-    return x*(x>0);
-}
-
-double gradient(double x)
-{
-    return (x>=0);
-}
-
-connected_layer make_connected_layer(int inputs, int outputs)
+connected_layer make_connected_layer(int inputs, int outputs, ACTIVATOR_TYPE activator)
 {
     int i;
     connected_layer layer;
@@ -32,6 +22,17 @@ connected_layer make_connected_layer(int inputs, int outputs)
     for(i = 0; i < outputs; ++i)
         layer.biases[i] = (double)rand()/RAND_MAX;
 
+    if(activator == SIGMOID){
+        layer.activation = sigmoid_activation;
+        layer.gradient = sigmoid_gradient;
+    }else if(activator == RELU){
+        layer.activation = relu_activation;
+        layer.gradient = relu_gradient;
+    }else if(activator == IDENTITY){
+        layer.activation = identity_activation;
+        layer.gradient = identity_gradient;
+    }
+    
     return layer;
 }
 
@@ -41,9 +42,9 @@ void run_connected_layer(double *input, connected_layer layer)
     for(i = 0; i < layer.outputs; ++i){
         layer.output[i] = layer.biases[i];
         for(j = 0; j < layer.inputs; ++j){
-            layer.output[i] += input[j]*layer.weights[i*layer.outputs + j];
+            layer.output[i] += input[j]*layer.weights[i*layer.inputs + j]; // full connected
         }
-        layer.output[i] = activation(layer.output[i]);
+        layer.output[i] = layer.activation(layer.output[i]); //activation
     }
 }
 
