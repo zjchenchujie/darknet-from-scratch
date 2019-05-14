@@ -1,7 +1,7 @@
-// #include "connected_layer.h"
-// #include "convolutional_layer.h"
-// #include "maxpool_layer.h"
-// #include "network.h"
+#include "connected_layer.h"
+#include "convolutional_layer.h"
+#include "maxpool_layer.h"
+#include "network.h"
 #include "image.h"
 
 #include <time.h>
@@ -88,7 +88,7 @@ void test_rotate()
     rotate_image(random);
     show_image(random, "Test Rotate Random");
 }
-#if 0
+#if 1
 void test_network()
 {
     network net;
@@ -107,7 +107,7 @@ void test_network()
     net.types[9] = CONNECTED;
     net.types[10] = CONNECTED;
 
-    image dog = load_image("test_hinton.jpg");
+    image dog = load_image("dog.jpg");
 
     int n = 48;
     int stride = 4;
@@ -192,9 +192,9 @@ int main()
     //test_upsample();
     // test_rotate();
     // test_load();
-    // test_network();
+    test_network();
     //test_convolutional_layer();
-    test_color();
+    // test_color();
     cvWaitKey(0);
     return 0;
 }
