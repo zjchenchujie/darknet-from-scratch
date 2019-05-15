@@ -48,35 +48,13 @@ void run_connected_layer(double *input, connected_layer layer)
     }
 }
 
-void backpropagate_connected_layer(double *input, connected_layer layer)
+void learn_connected_layer(double *input, connected_layer layer)
 {
-    int i, j;
-    double *old_input = calloc(layer.inputs, sizeof(double));
-    memcpy(old_input, input, layer.inputs*sizeof(double));
-    memset(input, 0, layer.inputs*sizeof(double));
-
-    for(i = 0; i < layer.outputs; ++i){
-        for(j = 0; j < layer.inputs; ++j){
-            input[j] += layer.output[i]*layer.weights[i*layer.outputs + j];
-        }
-    }
-    for(j = 0; j < layer.inputs; ++j){
-        input[j] = input[j]*gradient(old_input[j]);
-    }
-    free(old_input);
+    calculate_update_connected_layer(input, layer);
+    backpropagate_connected_layer(input, layer);
 }
 
-void calculate_updates_connected_layer(double *input, connected_layer layer)
-{
-    int i, j;
-    for(i = 0; i < layer.outputs; ++i){
-        layer.bias_updates[i] += layer.output[i];
-        for(j = 0; j < layer.inputs; ++j){
-            layer.weight_updates[i*layer.outputs + j] += layer.output[i]*input[j];
-        }
-    }
-}
-
+// 更新权重
 void update_connected_layer(connected_layer layer, double step)
 {
     int i,j;
@@ -84,10 +62,41 @@ void update_connected_layer(connected_layer layer, double step)
         layer.biases[i] += step*layer.bias_updates[i];
         for(j = 0; j < layer.inputs; ++j){
             int index = i*layer.outputs+j;
-            layer.weights[index] = layer.weight_updates[index];
+            layer.weights[index] += step*layer.weight_updates[index];
         }
     }
     memset(layer.bias_updates, 0, layer.outputs*sizeof(double));
     memset(layer.weight_updates, 0, layer.outputs*layer.inputs*sizeof(double));
 }
+
+// 计算反向传播公式中的 loss相对于权重的偏导数
+void calculate_updates_connected_layer(double *input, connected_layer layer)
+{
+    int i, j;
+    for(i = 0; i < layer.outputs; ++i){
+        layer.bias_updates[i] += layer.output[i]; // TODO. gradient
+        for(j = 0; j < layer.inputs; ++j){
+            layer.weight_updates[i*layer.outputs + j] += layer.output[i]*input[j];
+        }
+    }
+}
+
+// 由delta(l+1) 计算 delta（l), 更新前的input为delta（l+1)
+void backpropagate_connected_layer(double *input, connected_layer layer)
+{
+    int i, j;
+    
+    for(j = 0; j < layer.inputs; ++i){
+        double grad = layer.gradient(input[j]);
+        input[j] = 0;
+        for(i = 0; i < layer.outputs; ++i){
+            input[j] += layer.output[i]*layer.weights[i*layer.outputs + j];
+        }
+        input[j] *= grad;
+    }
+}
+
+
+
+
 

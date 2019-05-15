@@ -16,10 +16,22 @@ typedef struct{
     double (* gradient)();
 } connected_layer;
 
+// init layer
 connected_layer make_connected_layer(int inputs, int outputs, ACTIVATOR_TYPE activator);
+
+// forward
 void run_connected_layer(double *input, connected_layer layer);
-void backpropagate_connected_layer(double *input, connected_layer layer);
-void calculate_updates_connected_layer(double *input, connected_layer layer);
+
+// compute updates of weight and bias
+void learn_connected_layer(double *input, connected_layer layer);
+
+// weight and bias update
 void update_connected_layer(connected_layer layer, double step);
+
+// compute gradient
+void backpropagate_connected_layer(double *input, connected_layer layer);
+
+// compute delta
+void calculate_update_connected_layer(double *input, connected_layer layer);
 
 #endif
