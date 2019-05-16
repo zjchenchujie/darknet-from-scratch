@@ -7,8 +7,9 @@
 network make_network(int n){
     network net;
     net.n = n;
-    net.layers = calloc(n, sizeof(void*));
-    net.types = calloc(n, sizeof(LAYER_TYPE));
+    net.layers = calloc(net.n, sizeof(void *));
+    net.types = calloc(net.n, sizeof(LAYER_TYPE));
+    return net;
 }
 void run_network(image input, network net)
 {

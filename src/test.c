@@ -244,7 +244,7 @@ void test_parser()
         double err = pow((out[0]-truth),2.);
         avgerr = .99 * avgerr + .01 * err;
         //if(++count % 100000 == 0) printf("%f\n", avgerr);
-        if(++count % 100000 == 0) printf("%f %f :%f AVG %f \n", truth, out[0], err, avgerr);
+        if(++count % 1000 == 0) printf("%f %f :%f AVG %f \n", truth, out[0], err, avgerr);
         out[0] = truth - out[0];
         learn_network(t, net);
         update_network(net, .001);

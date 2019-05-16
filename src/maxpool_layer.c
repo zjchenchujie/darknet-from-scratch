@@ -3,6 +3,7 @@
 maxpool_layer* make_maxpool_layer(int h, int w, int c, int stride)
 {
     maxpool_layer* layer;
+    layer = malloc(sizeof(maxpool_layer));
     layer->stride = stride;
     layer->output = make_image((h-1)/stride+1, (w-1)/stride+1, c);
     return layer;
