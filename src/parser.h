@@ -3,7 +3,6 @@
 
 #include "network.h"
 
-network parser_network_cfg(char* filename);
-
+network parse_network_cfg(char* filename);
 
 #endif

@@ -3,7 +3,7 @@
 #include "maxpool_layer.h"
 #include "network.h"
 #include "image.h"
-// #include "parser.h"
+#include "parser.h"
 
 #include <time.h>
 #include <stdlib.h>
