@@ -140,7 +140,7 @@ int read_option(char* line, list* options){
 }
 
 list *read_cfg(char *filename){
-    FILE *file = fopen(filename, 'r');
+    FILE *file = fopen(filename, "r");
     if(file == NULL)
     {
         FILE_ERR("Open config file failed.\n");
