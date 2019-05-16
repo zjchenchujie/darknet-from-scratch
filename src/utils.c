@@ -29,3 +29,20 @@ char* fgetl(FILE *file){
     return line;
 
 }
+
+void strip(char* s){
+    int i;
+    int len = strlen(s);
+
+    int offset = 0;
+    for(i=0; i < len; ++i){
+        char c=s[i];
+        if(c==' ' || c=='\t' || c=='\n'){
+            ++offset;
+        }
+        else{
+            s[i - offset] = c;
+        }
+    }
+    s[len-offset] = '\0';
+}

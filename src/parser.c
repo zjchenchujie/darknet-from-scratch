@@ -151,7 +151,7 @@ list *read_cfg(char *filename){
     list *sections = make_list();
     section *current = NULL;
     while((line = fgetl(file)) != 0){
-        // strip(line); //TODO.
+        strip(line); //TODO.
         switch(line[0]){
             case '[':
                 ++nu;
