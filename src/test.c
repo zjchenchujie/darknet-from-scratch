@@ -230,7 +230,7 @@ void test_ann()
 
 void test_parser()
 {
-    network net = parse_network_cfg("/home/chujie/CLionProjects/darknet-ccj/test.cfg");
+    network net = parse_network_cfg("test.cfg");
     image t = make_image(1,1,1);
     int count = 0;
         

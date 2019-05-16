@@ -147,9 +147,8 @@ list *read_cfg(char *filename){
     }
     char* line;
     int nu = 0;
-
     list *sections = make_list();
-    section *current = NULL;
+    section *current = 0;
     while((line = fgetl(file)) != 0){
         strip(line); //TODO.
         switch(line[0]){
@@ -161,9 +160,10 @@ list *read_cfg(char *filename){
                     MEM_ERR("Memory allocate failed \n");
                     return 0;
                 }
+                list_insert(sections, current);
                 current->type = line;
                 current->options = make_list();
-                list_insert(sections, current);
+                
                 // free(line);
                 break;
             case '#':
@@ -181,6 +181,6 @@ list *read_cfg(char *filename){
                 break;
         }
     }
-    fclose(filename);
+    fclose(file);
     return sections;
 }
