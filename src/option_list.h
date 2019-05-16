@@ -10,6 +10,9 @@ typedef struct {
 }kvp;
 
 void option_insert(list* l, char* key, char* val);
+int option_find_int(list *l, char *key, int default_val);
+char* option_find_str(list *l, char* key, char* default_str);
+void option_unused(list *l);
 
 
 #endif

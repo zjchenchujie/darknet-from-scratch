@@ -14,7 +14,7 @@
 
 #define FILE_ERR(Msg, ...) CHUJIE_PRINTF_RED("Fatal", Msg, ## __VA_ARGS__)
 #define MEM_ERR(Msg, ...) CHUJIE_PRINTF_RED("Fatal", Msg, ## __VA_ARGS__)
-
+#define STD_ERR(Msg, ...) CHUJIE_PRINTF("Warning", Msg, ## __VA_ARGS__)
 char* fgetl(FILE *file);
 
 

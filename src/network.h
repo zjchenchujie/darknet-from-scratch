@@ -7,7 +7,8 @@
 typedef enum {
     CONVOLUTIONAL,
     CONNECTED,
-    MAXPOOL
+    MAXPOOL,
+    CUSTOM
 } LAYER_TYPE;
 
 typedef struct {
