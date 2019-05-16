@@ -75,7 +75,7 @@ void learn_convolutional_layer(image input, convolutional_layer layer)
         kernel_update(input, layer.kernel_updates[i], layer.stride, i, layer.output);
     }
     image old_input = copy_image(input);
-    backpropagate_convolutional_layer(input, layer);
+    // backpropagate_convolutional_layer(input, layer);
     for(i = 0; i < input.h*input.w*input.c; ++i){
         input.data[i] *= convolution_gradient(old_input.data[i]);
     }

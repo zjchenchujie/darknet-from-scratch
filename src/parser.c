@@ -6,8 +6,11 @@
 #include "maxpool_layer.h"
 #include "connected_layer.h"
 #include "option_list.h"
+#include "utils.h"
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 typedef struct {
     char *type;
@@ -106,7 +109,7 @@ LAYER_TYPE get_layer_type(char* type){
     else if(strcmp(type, "maxpool") == 0 || strcmp(type, "pool")){
         return MAXPOOL;
     }
-    else if(strcmp(type, "FC") == 0 || strmp(type, "connected")== 0){
+    else if(strcmp(type, "FC") == 0 || strcmp(type, "connected")== 0){
         return CONNECTED;
     }
     else{
@@ -148,10 +151,11 @@ list *read_cfg(char *filename){
     list *sections = make_list();
     section *current = NULL;
     while((line = fgetl(file)) != 0){
+        // strip(line); //TODO.
         switch(line[0]){
             case '[':
                 ++nu;
-                strip(line);
+                // strip(line);
                 current = malloc(sizeof(section));
                 if(current == NULL){
                     MEM_ERR("Memory allocate failed \n");
@@ -169,7 +173,7 @@ list *read_cfg(char *filename){
                 break;
             default:
                 // ++nu;
-                strip(line);
+                // strip(line);
                 if(!read_option(line, current->options)){
                     FILE_ERR("Config file error line: %d, can not parse: %s\n", nu, line);
                     free(line);

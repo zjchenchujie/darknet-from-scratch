@@ -70,7 +70,7 @@ void update_connected_layer(connected_layer layer, double step)
 }
 
 // 计算反向传播公式中的 loss相对于权重的偏导数
-void calculate_updates_connected_layer(double *input, connected_layer layer)
+void calculate_update_connected_layer(double *input, connected_layer layer)
 {
     int i, j;
     for(i = 0; i < layer.outputs; ++i){

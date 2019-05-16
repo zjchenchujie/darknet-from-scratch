@@ -157,6 +157,7 @@ void test_network()
     show_image_layers(get_network_image(net), "Test Network Layer");
 }
 
+#if 0
 void test_backpropagate()
 {
     int n = 3;
@@ -186,6 +187,7 @@ void test_backpropagate()
     subtract_image(dog, dog_copy);
     show_image(dog, "Test Backpropagate Difference");
 }
+#endif
 
 void test_ann()
 {
@@ -228,7 +230,7 @@ void test_ann()
 
 void test_parser()
 {
-    network net = parse_network_cfg("test.cfg");
+    network net = parse_network_cfg("/home/chujie/CLionProjects/darknet-ccj/test.cfg");
     image t = make_image(1,1,1);
     int count = 0;
         

@@ -6,7 +6,7 @@ CFLAGS=$(INCLUDE) -Wall -O0 -g
 
 OPENCV_LIB=-lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui -lopencv_core
 LDFLAGS=-L/usr/local/lib -L/home/chujie/anaconda3/lib
-LDFLAGS+=$(OPENCV_LIB) -lm -licui18n -licuuc -licudata
+LDFLAGS+=$(OPENCV_LIB) -lm -licui18n -licuuc -licudata -lz
 # VPATH=./src/
 C_SRC=$(wildcard src/*.c)
 OBJ=$(patsubst %.c, %.o, $(C_SRC))
