@@ -213,6 +213,16 @@ image load_image(char *filename)
     return out;
 }
 
+double avg_image_layer(image m, int l)
+{
+    int i;
+    double sum = 0;
+    for(i = 0; i < m.h*m.w; ++i){
+        sum += m.data[l*m.h*m.w + i];
+    }
+    return sum/(m.h*m.w);
+}
+
 image get_image_layer(image m, int l)
 {
     image out = make_image(m.h, m.w, 1);

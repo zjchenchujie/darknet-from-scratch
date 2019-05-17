@@ -83,7 +83,7 @@ void forward_convolutional_layer(const convolutional_layer layer, double* in)
 
 // 反向传播， 主要是计算delta
 // 这里的input是当前层的输入， layer.delta是层输出的delta（delta（l+1)), delta是前一层的delta
-void backward_convolutonal_layer(convolutional_layer layer, double *input, double OUT *delta)
+void backward_convolutional_layer(convolutional_layer layer, double *input, double OUT *delta)
 {
     int i;
 

@@ -66,7 +66,7 @@ void free_list(list *l){
     free(l);
 }
 
-void free_list_content(list *l){
+void free_list_contents(list *l){
     node* next = l->front;
     while(next){
         free(next->val);

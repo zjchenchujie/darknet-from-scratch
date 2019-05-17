@@ -21,6 +21,9 @@
 char* fgetl(FILE *file);
 void strip(char* s);
 
+int count_fields(char *line);
+double *parse_fields(char *line, int n);
+
 
 
 

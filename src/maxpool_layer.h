@@ -16,5 +16,5 @@ typedef struct {
 image get_maxpool_image(maxpool_layer layer);
 maxpool_layer* make_maxpool_layer(int h, int w, int c, int stride);
 void forward_maxpool_layer(const maxpool_layer layer, double *input);
-
+image get_maxpool_image(maxpool_layer layer);
 #endif

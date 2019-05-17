@@ -19,6 +19,7 @@ void subtract_image(image a, image b);
 
 void show_image(image p, char *name);
 void show_image_layers(image p, char *name);
+double avg_image_layer(image m, int l);
 
 image make_empty_image(int h, int w, int c);
 image make_image(int h, int w, int c);

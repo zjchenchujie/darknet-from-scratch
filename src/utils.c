@@ -46,3 +46,35 @@ void strip(char* s){
     }
     s[len-offset] = '\0';
 }
+
+int count_fields(char *line)
+{
+	int count = 0;
+	int done = 0;
+    char *c;
+	for(c = line; !done; ++c){
+		done = (*c == '\0');
+		if(*c == ',' || done) ++count;
+	}
+	return count;
+}
+
+double *parse_fields(char *line, int n)
+{
+	double *field = calloc(n, sizeof(double));
+	char *c, *p, *end;
+	int count = 0;
+	int done = 0;
+	for(c = line, p = line; !done; ++c){
+		done = (*c == '\0');
+		if(*c == ',' || done){
+			*c = '\0';
+			field[count] = strtod(p, &end);
+			if(p == c) field[count] = nan("");
+			if(end != c && (end != c-1 || *end != '\r')) field[count] = nan(""); //DOS file formats!
+			p = c+1;
+			++count;
+		}
+	}
+	return field;
+}

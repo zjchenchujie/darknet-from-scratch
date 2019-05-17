@@ -36,7 +36,7 @@ void learn_connected_layer(connected_layer layer, double *input);
 void update_connected_layer(connected_layer layer, double step, double momentum, double decay);
 
 // compute gradient
-void backpropagate_connected_layer(double *input, connected_layer layer);
+void backward_connected_layer(connected_layer layer, double *input, double *delta);
 
 // compute delta
 void calculate_update_connected_layer(double *input, connected_layer layer);
