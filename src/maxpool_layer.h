@@ -4,11 +4,17 @@
 #include "image.h"
 
 typedef struct {
+    int w;
+    int h;
+    int c;
     int stride;
-    image output;
+
+    double *delta;
+    double *output;
 } maxpool_layer;
 
+image get_maxpool_image(maxpool_layer layer);
 maxpool_layer* make_maxpool_layer(int h, int w, int c, int stride);
-void run_maxpool_layer(const image input, const maxpool_layer layer);
+void forward_maxpool_layer(const maxpool_layer layer, double *input);
 
 #endif

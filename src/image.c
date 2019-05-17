@@ -46,6 +46,8 @@ void normalize_image(image p)
             p.data[i+j*p.h*p.w] = (p.data[i+j*p.h*p.w] - min[j])/(max[j]-min[j]);
         }
     }
+    free(min);
+    free(max);
 }
 
 void threshold_image(image p, double t)
@@ -112,11 +114,24 @@ void show_image_layers(image p, char *name)
 
 image make_image(int h, int w, int c)
 {
+    image out = make_empty_image(h, w, c);
+    out.data = calloc(h*w*c, sizeof(double));
+    return out;
+}
+
+image make_empty_image(int h, int w, int c){
     image out;
     out.h = h;
     out.w = w;
     out.c = c;
-    out.data = calloc(h*w*c, sizeof(double));
+    out.data = NULL;
+    return out;
+}
+
+// vector2img
+image double_to_image(int h, int w, int c, double *data){
+    image out = make_empty_image(h, w, c);
+    out.data = data;
     return out;
 }
 
@@ -207,20 +222,20 @@ image get_image_layer(image m, int l)
     return out;
 }
 
-double get_pixel(image m, int x, int y, int c)
+double get_pixel(image m, int height, int width, int channel)
 {
-    assert(x < m.h && y < m.w && c < m.c);
-    return m.data[c*m.h*m.w + x*m.w + y];
+    assert(height < m.h && width < m.w && channel < m.c);
+    return m.data[channel*m.h*m.w + height*m.w + width];
 }
 double get_pixel_extend(image m, int x, int y, int c)
 {
     if(x < 0 || x >= m.h || y < 0 || y >= m.w || c < 0 || c >= m.c) return 0;
     return get_pixel(m, x, y, c);
 }
-void set_pixel(image m, int x, int y, int c, double val)
+void set_pixel(image m, int height, int width, int channel, double val)
 {
-    assert(x < m.h && y < m.w && c < m.c);
-    m.data[c*m.h*m.w + x*m.w + y] = val;
+    assert(height < m.h && width < m.w && channel < m.c);
+    m.data[channel*m.h*m.w + height*m.w + width] = val;
 }
 void set_pixel_extend(image m, int x, int y, int c, double val)
 {
