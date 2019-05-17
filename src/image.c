@@ -1,5 +1,6 @@
 #include "image.h"
 #include <stdio.h>
+#include "common.h"
 
 int windows = 0;
 
@@ -331,7 +332,7 @@ void single_update(image m, image update, int x, int y, double error)
     }
 }
 
-void kernel_update(image m, image update, int stride, int channel, image out)
+void kernel_update(image IN m, image OUT update, int IN stride, int channel, image IN out)
 {
     assert(m.c == update.c);
     zero_image(update);

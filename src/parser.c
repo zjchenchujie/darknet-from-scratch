@@ -51,7 +51,7 @@ network parse_network_cfg(char* filename){
                 w = m.w;
                 c = m.c;
             }
-            convolutional_layer *layer = make_convolutional_layer(w, h, c, num_out, kernel_size, stride);
+            convolutional_layer *layer = make_convolutional_layer(w, h, c, num_out, kernel_size, stride, layer_type);
             net.types[layer_n] = CONVOLUTIONAL;
             net.layers[layer_n] = (void *)layer;
             option_unused(options);
